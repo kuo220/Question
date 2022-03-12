@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+typedef struct Node
+{
+    int data;
+    int nxt;
+
+}Node;
+
+typedef Node* nodePtr;
+
+
+
+void set(const nodePtr ptr)
+{
+    ptr->data = 100;
+}
+
+
+
+int main()
+{   
+    Node node;
+    nodePtr ptr = &node;
+
+    set(ptr);
+    printf("%d", ptr->data);
+
+}
