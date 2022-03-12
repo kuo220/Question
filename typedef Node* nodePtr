@@ -19,6 +19,12 @@ void set(const nodePtr ptr)
 }
 
 
+// void set(const Node* ptr) // 無法更改data
+// {
+//     ptr->data = 100;
+// }
+
+
 
 int main()
 {   
