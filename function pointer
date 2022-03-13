@@ -42,19 +42,12 @@ Operation* pop(Operation* opHead)
     return tmpHead;
 }
 
+
 void initOperation(Operation* operation)
 {
     operation->push = push;
     operation->pop = pop;
 }
-
-
-
-
-
-int charToDigit(char c);
-bool isDigit(char c);
-ll charToOperand(char* express, int* opLoc, int expressLen);
 
 
 int main()
