@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdbool.h>
+#include <math.h>
+
+#define ll long long
+#define MAX_LEN 1000000
+
+
+typedef struct Operation
+{
+    ll operand;
+    char operator;
+    struct Operation* nxt;
+
+    struct Operation* (*push)(int operand, char operator, struct Operation* opHead);
+    struct Operation* (*pop)(struct Operation* opHead);
+
+}Operation;
+
+
+
+
+/* ===== struct Operation member function ===== */
+Operation* push(int operand, char operator, struct Operation* opHead)
+{   
+    Operation* newOperation = (Operation*)malloc(sizeof(Operation));
+    newOperation->operand = operand;
+    newOperation->operator = operator;
+    newOperation->nxt = opHead;
+
+    return newOperation;
+}
+
+Operation* pop(Operation* opHead)
+{
+    Operation* tmpHead = opHead->nxt;
+    memset(opHead, 0, sizeof(Operation));
+    free(opHead);
+    
+    return tmpHead;
+}
+
+void initOperation(Operation* operation)
+{
+    operation->push = push;
+    operation->pop = pop;
+}
+
+
+
+
+
+int charToDigit(char c);
+bool isDigit(char c);
+ll charToOperand(char* express, int* opLoc, int expressLen);
+
+
+int main()
+{
+    char express[MAX_LEN] = {0};
+
+    /* Init : struct Operation */
+    Operation operation;
+    Operation* opHead = &operation;
+
+    initOperation(opHead);
+
+
+    opHead = opHead->push(100, '+', opHead);
+    opHead = opHead->push(1000, '+', opHead);
+    
+    printf("%lld", opHead->operand);
+ }
